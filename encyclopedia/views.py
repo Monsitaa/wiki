@@ -1,9 +1,22 @@
 from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import redirect
 from . import util
 from django.core.files.storage import default_storage
 from markdown2 import Markdown
 from django.http import Http404
 import random
+import re
+
+def contains_accented_characters(text):
+    regex = r'[áéíóúÁÉÍÓÚüÜñÑ]'
+    return bool(re.search(regex, text))
+
+def is_valid_content(content):
+    caracteres_disponibles = r'^[\s\S]+$'
+    if contains_accented_characters(content):
+        return False
+    return re.match(caracteres_disponibles, content) is not None
 
 
 def index(request):
@@ -78,3 +91,31 @@ def search(request):
         })
     else:
         return Http404
+    
+def edit(request, title):
+    if request.method == "POST":
+        contenido = request.POST["content"]
+        title = request.POST["title"]
+        try:
+
+            if not is_valid_content(contenido):
+                context = {
+                    "title": title,
+                    "content": contenido,
+                    "error": True
+                }
+
+                return render(request, "encyclopedia/edit.html", context)
+
+            util.save_entry(title, contenido)
+            url = reverse("entries", args=[title])
+            return redirect(url)
+        except:
+            pass
+    else:
+        content = util.get_entry(title)
+        context = {
+            "title": title,
+            "content": content
+        }
+        return render(request, "encyclopedia/edit.html", context)

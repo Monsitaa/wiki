@@ -1,2 +1,0 @@
-#Guapollon Corporation
-jkfdnkngkie

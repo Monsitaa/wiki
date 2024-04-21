@@ -32,7 +32,7 @@ def entries(request, title):
 
     return render(request, "encyclopedia/entries.html", {
         "title": title,
-        "content": contenido
+        "html": contenido
     })
 
 def crearMD(request):
@@ -119,3 +119,15 @@ def edit(request, title):
             "content": content
         }
         return render(request, "encyclopedia/edit.html", context)
+    
+
+def delete(request, title):
+   response = util.delete_entry(title)
+   if response:
+        return render(request, "encyclopedia/index.html", {
+            "entries": util.list_entries(),
+            "deleted": True,
+            "title": title
+        })
+   else:
+        return render(request, "encyclopedia/404.html")

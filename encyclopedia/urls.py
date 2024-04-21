@@ -7,6 +7,7 @@ urlpatterns = [
     path("crearMD/", views.crearMD, name="create"),
     path("randomMD/", views.randomMD, name="random"),
     path("search/", views.search, name="search" ),
-    path("edit/<str:title>", views.edit, name= "edit")
+    path("edit/<str:title>", views.edit, name= "edit"),
+    path("delete/<str:title>", views.delete, name ="delete")
 
 ]

@@ -25,6 +25,14 @@ def save_entry(title, content):
     default_storage.save(filename, ContentFile(content))
 
 
+def delete_entry(title):
+    try:
+        filename = f"entries/{title}.md"
+        default_storage.delete(filename)
+        return True
+    except:
+        return False
+
 def get_entry(title):
     """
     Retrieves an encyclopedia entry by its title. If no such

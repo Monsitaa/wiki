@@ -25,52 +25,56 @@ def index(request):
     })
 
 def entries(request, title):
-    contenido = util.get_entry(title)
+    html = md_to_html(title)
 
-    if contenido is None:
-        raise Http404
-
-    return render(request, "encyclopedia/entries.html", {
-        "title": title,
-        "html": contenido
-    })
-
+    if html is None:
+        return render(request, "encyclopedia/404.html")
+    else:
+        try:
+            return render(request, "encyclopedia/entries.html", {
+                "title": title,
+                "html": html
+            })
+        except Exception as e:
+            print(e)
+            return render(request, "encyclopedia/404.html")
 def crearMD(request):
 
     if request.method == "POST":
         title = request.POST["title"]
         content = request.POST["content"]
-        util.save_entry(title, content)
-        return render(request, "encyclopedia/entries.html", {
-            "title": title,
-            "content": content
-        })
-
+        try: 
+            if not is_valid_content(content):
+                context = {
+                    "title": title,
+                    "content": content,
+                    "error": True
+                }
+                return render(request, "encyclopedia/crearMD.html", context)
+            else:
+                util.save_entry(title, content)
+                url = reverse("entries", args=[title])
+                return redirect(url)
+        except:
+            pass
     return render(request, "encyclopedia/crearMD.html")
 
 
-def md_to_html(title):
+def md_to_html(entry):
+    md = Markdown()
+    content = util.get_entry(entry)
+    if content is None:
+        return None
+    else:
+        return md.convert(content)
     
-    contenido = util.get_entry(title)
-    markdowner = Markdown()
-
-    if contenido == None:
-        raise None
-
-    return markdowner.convert(contenido)
-
 
 def randomMD(request):
-    entries = util.list_entries()
+    pages = util.list_entries()
+    random_page = pages[random.randint(0, (len(pages))-1)]
+    url = reverse("entries", args=[random_page])
+    return redirect(url)
 
-    randEntries = random.choice(entries)
-
-    contenidoHTML = md_to_html(randEntries)
-
-    return render(request, "encyclopedia/entries.html", {
-        "title": randEntries,
-        "content": contenidoHTML
-    })
 
 def search(request):
     query = request.GET['q']
@@ -90,7 +94,7 @@ def search(request):
             "query": query
         })
     else:
-        return Http404
+        return render(request, "encyclopedia/404.html")
     
 def edit(request, title):
     if request.method == "POST":
@@ -124,10 +128,7 @@ def edit(request, title):
 def delete(request, title):
    response = util.delete_entry(title)
    if response:
-        return render(request, "encyclopedia/index.html", {
-            "entries": util.list_entries(),
-            "deleted": True,
-            "title": title
-        })
+       url = reverse("index")
+       return redirect(url + "?deleted=True")
    else:
         return render(request, "encyclopedia/404.html")

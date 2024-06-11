@@ -21,13 +21,14 @@
 {% endif %}
     <h1>All Pages</h1>
 
-    <ul>
+    <ul class="space-y-2 font-medium">
         {% for entry in entries %}
             <li>
-                <a href="{% url 'entries' title=entry %}"> {{ entry }} </a>
+                <a href="{% url 'entries' title=entry %}" class="block py-2 px-4 text-gray-800 rounded-lg border border-gray-300 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:border-gray-500">
+                    {{ entry }}
+                </a>
             </li>
         {% endfor %}
     </ul>
-
 
 {% endblock %}

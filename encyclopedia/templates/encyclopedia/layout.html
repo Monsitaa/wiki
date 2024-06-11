@@ -5,246 +5,114 @@
 <html lang="en">
 
 <head>
-    <title>{% block title %}{% endblock %}</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
-    <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      margin: 0;
+      background-color: white;
+    }
+  </style>
 </head>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-body {
-font-family: "Raleway", sans-serif;
-  margin: 0;
-  background-color: white;
-}
-
-h1 {
-  font-weight: 750;
-  font-size: 2.35rem;
-  line-height: 2.5rem;
-  margin-block: 1rem;
-}
-
-h2 {
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 0.2rem;
-}
-
-h3 {
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  margin-block: 0.5rem;
-}
-
-h4 {
-  font-weight: 700;
-  font-size: 1.15rem;
-  line-height: 1.5rem;
-  margin-block: 0.5rem;
-}
- h5 {
-  font-weight: 700;
-  font-size: 1.05rem;
-  line-height: 1.5rem;
-  margin-block: 0.5rem;
- }
-
-h6 {
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  margin-block: 0.5rem;
-
-}
-pre {
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  overflow: auto;
-}
-
-img {
-  max-width: 20rem;
-  height: auto;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  margin-inline: auto;
-
-}
-code {
-  font-family: 'Ubuntu Mono', monospace;
-  background-color: #d7d7d7;
-  padding: 0.5rem;
-  border-radius: 4px;
-  font-size: medium;
-}
-
-article {
-  margin: 1rem;
-  padding: 1rem;
-}
-img.logo {
-  max-width: none; /* Anula el máximo ancho */
-  margin-right: 0.7rem;
-  margin-left: 0rem;
-  margin-block: 0rem;
-}
-
-ol {
-  list-style-type: decimal;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.sidebar-link
-{
-  list-style: none;
-  margin-left: -1.5rem;
-}
-ul {
-  list-style-type: disc;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-
-}
-a {
-  text-decoration: none;
-  color: #0369a1;
-  font-weight: 500;
-}
-
-.tracker {
-  list-style: none;
-}
-blockquote {
-  font-style: italic;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-  line-height: 2;
-  border-left: 5px solid #ccc;
-  padding-left: 1rem;
-
-}
-.basic-link {
-  text-decoration: none;
-  color: black;
-}
-.redirect-link {
-  text-decoration: none;
-  color: white;
-}
-.main {
-  padding: 10px;
-}
-
-.search {
-  width: 100%;
-  font-size: 15px;
-  line-height: 15px;
-}
-
-.sidebar {
-  background-color: #f0f0f0;
-  height: 100vh;
-  padding: 20px;
-}
-
-.sidebar h2 {
-  margin-top: 5px;
-}
-
-.link {
-  text-transform: none;
-}
-
-.link:hover {
-  background-color: #e5e7ebc0;
-  border-radius: 5px;
-}
-
-.wikis {
-  text-transform: capitalize;
-}
-</style>
 <body>
 
-    
-<button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+
+  <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button"
+    class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+      <path clip-rule="evenodd" fill-rule="evenodd"
+        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+      </path>
     </svg>
- </button>
- 
- <aside id="logo-sidebar" class="basic-link fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-100" aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800">
-       <a href="{% url 'index' %}" class="basic-link flex items-center ps-2.5 mb-5">
-          <img src="https://cdn-icons-png.flaticon.com/512/1/1262.png" class="logo h-6 me-3 sm:h-7" alt="Flowbite Logo" />
-          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Wikipedia</span>
-       </a>
+  </button>
 
-       <ul class="space-y-2 font-medium">
+  <aside id="logo-sidebar"
+    class="basic-link fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-100"
+    aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-red-200 dark:bg-gray-800">
+      <a href="{% url 'index' %}" class="basic-link flex items-center ps-2.5 mb-5">
+        <img src="https://th.bing.com/th/id/R.ec5468dab26e03a5ca84913b0c7a8fdd?rik=YQzRW1pHUEfEsw&riu=http%3a%2f%2fwww.delipollo.com%2fimages%2fbtn-marcas-g.png%3fcrc%3d115361646&ehk=7N6t6cM6mP6HcJqTCA637nX5Cocw6vTCKBJWhVARlGo%3d&risl=&pid=ImgRaw&r=0"
+          class="logo h-6 sm:h-7" alt="Flowbite Logo" />
+        <span class="self-center text-xl font-extrabold whitespace-nowrap dark:text-white">Guakipedia</span>
+      </a>
+
+      <ul class="space-y-2 font-medium">
         <li class="sidebar-link">
-            <form class="flex items-center" action="{% url 'search' %}" >   
-                <label for="simple-search" class="sr-only">Search</label>
-                <div class="relative w-full">
-                    <input name="q" type="text" id="simple-search" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-700 block w-full px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Encyclopedia" required>
-                </div>
-                <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-gray-900 rounded-lg border border-gray-700 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                    <span class="sr-only">Search</span>
-                </button>
-            </form>
+          <form class="flex items-center" action="{% url 'search' %}">
+            <label for="simple-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <input name="q"  type="text" id="search-input"
+                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-700 block w-full px-4 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                placeholder="query" required>
+            </div>
+            <button type="submit"
+              class="p-2.5 ms-2 text-sm font-medium text-white bg-gray-900 rounded-lg border border-gray-700 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+              <span class="sr-only">Search</span>
+            </button>
+          </form>
         </li>
-          <li class="sidebar-link">
-             <a href="{% url 'index' %}" class="font-semibold basic-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                </svg>                
-                <span class="ms-3">Home</span>
-             </a>
-          </li>
-          <li class="sidebar-link">
-            <a href="{% url 'create' %}" class="font-semibold basic-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-                </svg>
-                
-               <span class="ms-3">Create New Page</span>
-            </a>
-         </li>
-         <li class="sidebar-link">
-            <a href="{% url 'random' %}" class="font-semibold basic-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-                </svg>
-                
-               <span class="ms-3">Random Page</span>
-            </a>
-         </li>
-       </ul>
+        <li class="sidebar-link">
+          <a href="{% url 'index' %}"
+            class="font-semibold basic-link flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <span class="ms-3">Home</span>
+          </a>
+        </li>
+        <li class="sidebar-link">
+          <a href="{% url 'create' %}"
+            class="font-semibold basic-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+            </svg>
+
+            <span class="ms-3">Create New Page</span>
+          </a>
+        </li>
+        <li class="sidebar-link">
+          <a href="{% url 'random' %}"
+            class="font-semibold basic-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+            </svg>
+
+            <span class="ms-3">Random Page</span>
+          </a>
+        </li>
+      </ul>
     </div>
- </aside>
- 
- <div class="p-4 sm:ml-64">
+  </aside>
+
+  <div class="p-4 sm:ml-64">
     <div class="p-4 dark:border-gray-700">
-       {% block nav %}
-       {% endblock %}
+      {% block nav %}
+      {% endblock %}
 
-       {% block body %}
-       {% endblock %}
+      {% block body %}
+      {% endblock %}
     </div>
- </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 </body>
 
 </html>
